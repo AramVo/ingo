@@ -1,4 +1,6 @@
-import { Column, Model, Table, DataType, Index } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, Index, HasMany } from 'sequelize-typescript';
+
+import { Casco } from 'src/casco/db/casco.model';
 
 @Table
 export class User extends Model {
@@ -22,4 +24,7 @@ export class User extends Model {
 
   @Column({ allowNull: false })
   password: string
+
+  @HasMany(() => Casco, { onDelete: 'CASCADE' })
+  casco: Casco;
 }
