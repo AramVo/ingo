@@ -9,7 +9,6 @@ export class UsersService {
   constructor(@InjectModel(User) private userModel: typeof User) { }
 
   async create(createUserDto: CreateUserDto) {
-    // const user = await this.userModel.create(createUserDto);
     const user = await this.userModel.create({
       firstName: createUserDto.firstName,
       lastName: createUserDto.lastName,
@@ -33,5 +32,9 @@ export class UsersService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  getUserByEmail(email: string) {
+    return this.userModel.findOne({ where: { email } })
   }
 }
