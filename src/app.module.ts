@@ -11,6 +11,8 @@ import { User } from './users/db/user.model';
 import { InsuranceType } from './insurance-types/db/insurance-type.model';
 import { InsuranceFields } from './insurance-types/db/insurance-fields.model';
 import { Casco } from './casco/db/casco.model';
+import { HealthModule } from './health/health.module';
+import { Health } from './health/db/health.model';
 
 @Module({
   imports: [
@@ -35,7 +37,8 @@ import { Casco } from './casco/db/casco.model';
             User,
             InsuranceType,
             InsuranceFields,
-            Casco
+            Casco,
+            Health,
           ],
         }
       },
@@ -46,6 +49,7 @@ import { Casco } from './casco/db/casco.model';
     CascoModule,
     InsuranceTypesModule,
     CascoModule,
+    HealthModule,
   ],
 })
 export class AppModule { }
