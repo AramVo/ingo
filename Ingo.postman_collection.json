@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "227c78ac-6b0f-41b1-97da-0d5c4ec8d175",
+		"name": "Ingo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33873718"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Smith\",\n    \"email\": \"Jane@test.com\",\n    \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jane@test.com\",\n    \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create casco",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAdGVzdC5jb20iLCJpZCI6MSwiaWF0IjoxNzExNDU5NjQzfQ.khgGijPPvQSTSuVBqJiY_C7INkdnYMc_QF5Cg0lhVhE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"Angelina\",\n  \"lastName\": \"Jolie\",\n  \"email\": \"jolie@test.com\",\n  \"car\": \"Ferrari\",\n  \"cascoSpeceficField\": \"some data 1\",\n  \"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/casco",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"casco"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all cascos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAdGVzdC5jb20iLCJpZCI6MSwiaWF0IjoxNzExNDU5NjQzfQ.khgGijPPvQSTSuVBqJiY_C7INkdnYMc_QF5Cg0lhVhE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/casco",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"casco"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get casco by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAdGVzdC5jb20iLCJpZCI6MSwiaWF0IjoxNzExNDU5NjQzfQ.khgGijPPvQSTSuVBqJiY_C7INkdnYMc_QF5Cg0lhVhE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/casco/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"casco",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create insurance type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"CASCO\",\n    \"path\": \"/casco\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/insurance-types",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"insurance-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create insurance type field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/insurance-types/field",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"insurance-types",
+						"field"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get insurance types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/insurance-types",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"insurance-types"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
