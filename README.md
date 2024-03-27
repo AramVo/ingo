@@ -1,73 +1,102 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# How to run
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+To run the app you need MySql and NodeJS.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+> You can use docker to run MySql in the container:
 
-## Description
+    docker run -e MYSQL_ROOT_PASSWORD=testRoot -e MYSQL_DATABASE=ingo -e MYSQL_USER=testUser -e MYSQL_PASSWORD=testPass -p 3306:3306 --name test-mysql -v mysql:/var/lib/mysql -d mysql
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+> To run `NestJS` app just create `.env.dev` file and copy/past the content of the `.env.example` into the `.env.dev`. After that run `npm run start:dev`.
 
-## Installation
+# Modules of the app
 
-```bash
-$ npm install
+The app consists of the following modules (besides app module):
+
+1. Users
+2. Auth
+3. Casco, Health (Those are insurance products, we can add others)
+4. Insurance-types
+
+### Users
+
+Users module is used for creating, getting and storing user datas
+
+### Auth
+
+Auth module used for registration and login. Also it provides AuthGuard for checking JWT tokens.
+
+### Casco, Health
+
+Casco and Health modules are used for stroing users insurance infomations.<br>
+For adding a new insurance product we can copy one of those modules, the update the model and dto fields, class and property names.
+
+### Insurance-types
+
+Insurance-types module act as a metadata for insurance products. This module has 2 tables `insurance-types` and `insuarance-fields` fields.<br>
+
+`insurance-types` store the insurance products info:
+> 1. name - the name of the product that will shown in the front end.
+> 2. path - the API path to insurane product. For example: `/casco` and `/health`
+
+<br>
+
+`insurance-fields` stores info about insurance product fields:
+
+> 1. name - the name of the field, for example `firstName`, `email` and etc.
+> 2. valueType - the type of the field.
+> 3. typeId - this is the foeign key of the insurance type.
+
+#### We can get the insurance type joined with it's fields. The data will look like this:
+```{
+        "id": 2,
+        "name": "Health",
+        "path": "/health",
+        "createdAt": "2024-03-26T16:05:15.000Z",
+        "updatedAt": "2024-03-26T16:05:15.000Z",
+        "fields": [
+            {
+                "id": 6,
+                "name": "firstName",
+                "valueType": "STRING",
+                "typeId": 2,
+                "createdAt": "2024-03-26T16:07:45.000Z",
+                "updatedAt": "2024-03-26T16:07:45.000Z"
+            },
+            {
+                "id": 7,
+                "name": "lastName",
+                "valueType": "STRING",
+                "typeId": 2,
+                "createdAt": "2024-03-26T16:08:08.000Z",
+                "updatedAt": "2024-03-26T16:08:08.000Z"
+            },
+            {
+                "id": 8,
+                "name": "email",
+                "valueType": "STRING",
+                "typeId": 2,
+                "createdAt": "2024-03-26T16:08:20.000Z",
+                "updatedAt": "2024-03-26T16:08:20.000Z"
+            },
+            {
+                "id": 9,
+                "name": "age",
+                "valueType": "NUMBER",
+                "typeId": 2,
+                "createdAt": "2024-03-26T16:08:26.000Z",
+                "updatedAt": "2024-03-26T16:08:26.000Z"
+            },
+            {
+                "id": 10,
+                "name": "healthSpeceficField",
+                "valueType": "STRING",
+                "typeId": 2,
+                "createdAt": "2024-03-26T16:08:32.000Z",
+                "updatedAt": "2024-03-26T16:08:32.000Z"
+            }
+        ]
+    }
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+> When we add new insurance product, we need to add appropriate records in the `insurance-types` and `insuarance-fields` tables. This will allow as to not make any changes in the  front end with each new product. <br>
+In front end we wiil get this data and then use it to generate appropriate form items based on the insuarance fields and make API calls by using `path` value.
